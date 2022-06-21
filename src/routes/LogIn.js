@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Header from "components/Header";
 import { Link } from "react-router-dom";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { authService } from "fbsetting";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -37,6 +39,19 @@ const LogIn = () => {
     event.preventDefault();
   }
 
+  const onSocialClick = async(event) => {
+    let provider;
+    try {
+      provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(authService, provider);
+      console.log(result);
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   return(
     <>
       <span>LogIn ++</span>
@@ -65,7 +80,7 @@ const LogIn = () => {
         placeholder="password"/>
 
         <button type="submit" onSubmit={logInSubmit}>Sign In</button>
-        <button>Sign With Google</button>
+        <button onClick={onSocialClick}>Sign With Google</button>
 
         <Link to="/sign-up">
           <button>Sign Up</button>
