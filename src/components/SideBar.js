@@ -28,7 +28,7 @@ const SideBar = () => {
           <li>Profile</li>
         </Link>
 
-          <li onClick={onLogOut}>Logout</li>
+        <li onClick={onLogOut}>Logout</li>
       </ul>
     </>
   );
